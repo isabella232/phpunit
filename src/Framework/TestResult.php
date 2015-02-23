@@ -56,6 +56,12 @@
  */
 class PHPUnit_Framework_TestResult implements Countable
 {
+
+    /**
+    * @var integer
+    */
+    protected $percentageSkip = 0;
+
     /**
      * @var array
      */
@@ -835,6 +841,27 @@ class PHPUnit_Framework_TestResult implements Countable
     {
         $this->codeCoverage = $codeCoverage;
     }
+
+    /**
+    * Sets the percentage of tests which would be skipped by default during a PHPUnit run.
+    *
+    * @param integer $percentageSkip
+    */
+     public function setPercentageSkip($percentageSkip)
+     {
+         $this->percentageSkip = $percentageSkip;
+     }
+
+     /**
+     * Gets the percentage of tests which would be skipped by default during a PHPUnit run.
+     *
+     * @return integer
+     */
+     public function getPercentageSkip()
+    {
+       return $this->percentageSkip;
+    }
+
 
     /**
      * Enables or disables the error-to-exception conversion.
