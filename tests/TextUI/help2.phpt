@@ -16,12 +16,13 @@ Usage: phpunit [options] UnitTest [UnitTest.php]
 
 Code Coverage Options:
 
-  --coverage-clover <file>  Generate code coverage report in Clover XML format.
-  --coverage-crap4j <file>  Generate code coverage report in Crap4J XML format.
-  --coverage-html <dir>     Generate code coverage report in HTML format.
-  --coverage-php <file>     Export PHP_CodeCoverage object to file.
-  --coverage-text=<file>    Generate code coverage report in text format.
-                            Default: Standard output.
+  --coverage-clover <file>          Generate code coverage report in Clover XML format.
+  --coverage-crap4j <file>          Generate code coverage report in Crap4J XML format.
+  --coverage-html <dir>             Generate code coverage report in HTML format.
+  --coverage-php <file>             Export PHP_CodeCoverage object to file.
+  --coverage-json-overview <file>   Export PHP_CodeCoverage object to file.
+  --coverage-text=<file>            Generate code coverage report in text format.
+                                    Default: Standard output.
   --coverage-xml <dir>      Generate code coverage report in PHPUnit XML format.
 
 Logging Options:

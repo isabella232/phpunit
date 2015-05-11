@@ -336,6 +336,10 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
             $codeCoverageReports++;
         }
 
+        if (isset($arguments['coverageJsonOverview'])) {
+            $codeCoverageReports++;
+        }
+
         if (isset($arguments['coverageText'])) {
             $codeCoverageReports++;
         }
@@ -488,6 +492,18 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
 
                 $writer = new PHP_CodeCoverage_Report_PHP;
                 $writer->process($codeCoverage, $arguments['coveragePHP']);
+
+                $this->printer->write(" done\n");
+                unset($writer);
+            }
+
+            if (isset($arguments['coverageJsonOverview'])) {
+                $this->printer->write(
+                    "\nGenerating code coverage overview report in Json overview format ..."
+                );
+
+                $writer = new PHP_CodeCoverage_Report_JsonOverview;
+                $writer->process($codeCoverage, $arguments['coverageJsonOverview']);
 
                 $this->printer->write(" done\n");
                 unset($writer);
@@ -794,6 +810,11 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
                 $arguments['coveragePHP'] = $loggingConfiguration['coverage-php'];
             }
 
+            if (isset($loggingConfiguration['coverage-json-overview']) &&
+                !isset($arguments['coverageJsonOverview'])) {
+                $arguments['coverageJsonOverview'] = $loggingConfiguration['coverage-json-overview'];
+            }
+
             if (isset($loggingConfiguration['coverage-text']) &&
                 !isset($arguments['coverageText'])) {
                 $arguments['coverageText'] = $loggingConfiguration['coverage-text'];
@@ -853,6 +874,7 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
             if ((isset($arguments['coverageClover']) ||
                 isset($arguments['coverageCrap4J']) ||
                 isset($arguments['coverageHtml']) ||
+                isset($arguments['coverageJsonOverview']) ||
                 isset($arguments['coveragePHP'])) ||
                 isset($arguments['coverageText']) &&
                 $this->canCollectCodeCoverage) {
